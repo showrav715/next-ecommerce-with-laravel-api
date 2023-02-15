@@ -1,44 +1,49 @@
-import { BlogContext, BlogContextProvider } from '@/lib/context/BlogContext'
-import Link from 'next/link';
-import React, { useContext, useEffect } from 'react'
+import BlogCard from "@/component/BlogCard";
+import BreadCrumb from "@/component/common/BreadCrumb";
+import Container from "@/component/styled/Container";
+import React from "react";
 
-export default function blog({data}) {
-  // const { getBlogs,blogs } = useContext(BlogContext);
 
-  // useEffect(() => {
-  //   const blogs = getBlogs();
-  //   console.log(blogs);
-  // }, [])
-  
- 
+const Blog = () => {
   return (
-    <div>
-      Blog
-      {data.map((blog) => {
-        return (
-          <div>
-            <h1>{blog.title}</h1>
-            <p>{blog.body}</p>
-            <Link legacyBehavior href={
-              {
-                pathname: '/blog/[id]',
-                query: { ...blog }
-              }
-            }>
-              <a>Read More</a>
-            </Link>
+    <>
+     
+      <BreadCrumb title="Blogs" />
+      <Container class1="blog-wrapper home-wrapper-2 py-5">
+        <div className="row">
+          <div className="col-3">
+            <div className="filter-card mb-3">
+              <h3 className="filter-title">Find By Categories</h3>
+              <div>
+                <ul className="ps-0">
+                  <li>Watch</li>
+                  <li>Tv</li>
+                  <li>Camera</li>
+                  <li>Laptop</li>
+                </ul>
+              </div>
+            </div>
           </div>
+          <div className="col-9">
+            <div className="row">
+              <div className="col-6 mb-3">
+                <BlogCard />
+              </div>
+              <div className="col-6 mb-3">
+                <BlogCard />
+              </div>
+              <div className="col-6 mb-3">
+                <BlogCard />
+              </div>
+              <div className="col-6 mb-3">
+                <BlogCard />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
+  );
+};
 
-         )
-       })}
-    </div>
-  )
-}
-
-export async function getServerSideProps(context) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
-  const data = await res.json()
-  return {
-    props: { data }
-  }
-}
+export default Blog;
