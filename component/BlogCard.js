@@ -12,7 +12,7 @@ const BlogCard = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque quaerat
           accusamus officia
         </p>
-        <Link href="/"className="button">
+        <Link href={`blog/:${2}`} className="button">
           Read More
         </Link>
       </div>
