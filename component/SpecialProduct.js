@@ -1,3 +1,4 @@
+import ReactStars from "react-rating-stars-component";
 import Link from "next/link";
 const SpecialProduct = () => {
   return (
@@ -13,13 +14,13 @@ const SpecialProduct = () => {
               <h6 className="title">
                 Samsung Galaxy Note10+ Mobile Phone; Sim...
               </h6>
-              {/* <ReactStars
+              <ReactStars
                 count={5}
                 size={24}
                 value={4}
                 edit={false}
                 activeColor="#ffd700"
-              /> */}
+              />
               <p className="price">
                 <span className="red-p">$100</span> &nbsp; <strike>$200</strike>
               </p>

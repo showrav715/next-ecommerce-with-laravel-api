@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
+import { CategoryContext } from "@/lib/context/CategoryContext";
 
 const Header = () => {
+
+  const { categories } = useContext(CategoryContext);
   return (
     <>
       <header className="header-top-strip py-3">
@@ -72,7 +75,7 @@ const Header = () => {
                 </div>
                 <div>
                   <Link
-                    href="/login"
+                    href="/user/login"
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src="/images/user.svg" alt="user" />
@@ -121,21 +124,16 @@ const Header = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
-                        <Link className="dropdown-item text-white" href="">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" href="">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" href="">
-                          Something else here
-                        </Link>
-                      </li>
+                      {categories.map((category) => (
+                         <li key={categories.id}>
+                         <Link className="dropdown-item text-white" href="/store">
+                           {category.name}
+                         </Link>
+                       </li>
+                        ))}
+                      
+                     
+                     
                     </ul>
                   </div>
                 </div>

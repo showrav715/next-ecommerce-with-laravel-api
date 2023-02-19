@@ -644,6 +644,12 @@
     height: 600px !important;
     object-fit: cover;
   }
+
+  /* main-product-image first img display none */
+  .main-product-image img:first-child {
+    display: none;
+  }
+
   .other-product-images {
     background-color: white;
     padding: 20px;

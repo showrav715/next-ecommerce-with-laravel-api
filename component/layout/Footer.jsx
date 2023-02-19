@@ -48,10 +48,10 @@ const Footer = () => {
                   +91 8264954234
                 </a>
                 <a
-                  href="mailto:navdeepdahiya753@gmail.com"
+                  href="mailto:showrabhasan715@gmail.com"
                   className="mt-2 d-block mb-0 text-white"
                 >
-                  navdeepdahiya753@gmail.com
+                  showrabhasan715@gmail.com
                 </a>
                 <div className="social_icons d-flex align-items-center gap-30 mt-4">
                   <a className="text-white" href="#">
@@ -72,16 +72,16 @@ const Footer = () => {
             <div className="col-3">
               <h4 className="text-white mb-4">Information</h4>
               <div className="footer-link d-flex flex-column">
-                <Link href="/privacy-policy" className="text-white py-2 mb-1">
+                <Link href="/page/1" className="text-white py-2 mb-1">
                   Privacy Policy
                 </Link>
-                <Link href="/refund-policy" className="text-white py-2 mb-1">
+                <Link href="/page/1" className="text-white py-2 mb-1">
                   Refund Policy
                 </Link>
-                <Link href="/shipping-policy" className="text-white py-2 mb-1">
+                <Link href="/page/1" className="text-white py-2 mb-1">
                   Shipping Policy
                 </Link>
-                <Link href="/term-conditions" className="text-white py-2 mb-1">
+                <Link href="/page/1" className="text-white py-2 mb-1">
                   Terms & Conditions
                 </Link>
                 <Link href={'blogs'} className="text-white py-2 mb-1">Blogs</Link>
@@ -90,9 +90,9 @@ const Footer = () => {
             <div className="col-3">
               <h4 className="text-white mb-4">Account</h4>
               <div className="footer-link d-flex flex-column">
-                <Link href="/" className="text-white py-2 mb-1">About Us</Link>
-                <Link  href="/" className="text-white py-2 mb-1">Faq</Link>
-                <Link  href="/" className="text-white py-2 mb-1">Contact</Link>
+                <Link href="/page/1" className="text-white py-2 mb-1">About Us</Link>
+                <Link  href="/page/1" className="text-white py-2 mb-1">Faq</Link>
+                <Link  href="/contact" className="text-white py-2 mb-1">Contact</Link>
               </div>
             </div>
             <div className="col-2">

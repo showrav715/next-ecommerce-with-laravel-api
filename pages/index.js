@@ -6,13 +6,27 @@ import ProductCard from "@/component/ProductCard";
 import SpecialProduct from "@/component/SpecialProduct";
  
 import BlogCard from "@/component/BlogCard";
-export default function Home() {
+import Slider from "react-slick";
+import Service from "@/component/Service";
+import ApiUrl from "@/lib/Api/ApiUrl";
+import Categories from "@/component/Categories";
+export default function Home({ services }) {
+console.log(services);
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    cssEase: "linear"
+  };
   return (
     <>
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-6">
-            <div className="main-banner position-relative ">
+          <Slider {...settings}>
+          <div className="main-banner position-relative ">
               <img
                 src="images/main-banner-1.jpg"
                 className="img-fluid rounded-3"
@@ -25,7 +39,53 @@ export default function Home() {
                 <Link href={'/'} className="button">BUY NOW</Link>
               </div>
             </div>
+          <div className="main-banner position-relative ">
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
+                <h4>SUPERCHARGED FOR PROS.</h4>
+                <h5>iPad S13+ Pro.</h5>
+                <p>From $999.00 or $41.62/mo.</p>
+                <Link href={'/'} className="button">BUY NOW</Link>
+              </div>
+            </div>
+          <div className="main-banner position-relative ">
+              <img
+                src="images/main-banner-1.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
+                <h4>SUPERCHARGED FOR PROS.</h4>
+                <h5>iPad S13+ Pro.</h5>
+                <p>From $999.00 or $41.62/mo.</p>
+                <Link href={'/'} className="button">BUY NOW</Link>
+              </div>
+            </div>
+        </Slider>
+
+
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <div className="col-6">
             <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
               <div className="small-banner position-relative">
@@ -89,113 +149,11 @@ export default function Home() {
         </div>
       </Container>
  
-     <Container class1="home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12">
-            <div className="servies d-flex align-items-center justify-content-between">
-              
-                  <div className="d-flex align-items-center gap-15">
-                    <img src="/images/service-02.png" alt="services" />
-                    <div>
-                      <h6>Music & Gaming</h6>
-                      <p className="mb-0">Music & Gaming Service</p>
-                    </div>
-                  </div>
-              
-                  <div className="d-flex align-items-center gap-15">
-                    <img src="/images/service-03.png" alt="services" />
-                    <div>
-                      <h6>Cameras</h6>
-                      <p className="mb-0">Cameras Service</p>
-                    </div>
-              </div>
-              
-                  <div className="d-flex align-items-center gap-15">
-                    <img src="/images/service-04.png" alt="services" />
-                    <div>
-                      <h6>Smart Tv</h6>
-                      <p className="mb-0">Smart Tv Service</p>
-                    </div>
-                  </div>
-              
-                  <div className="d-flex align-items-center gap-15">
-                    <img src="/images/service-04.png" alt="services" />
-                    <div>
-                      <h6>Smart Watches</h6>
-                      <p className="mb-0">Smart Watches Service</p>
-                    </div>
-                  </div>
-              
-            </div>
-          </div>
-        </div>
-      </Container> 
+    
+      <Service data={services} />
 
-      
-      <Container class1="home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12">
-            <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Tv</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Music & Gaming</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Cameras</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/camera.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Tv</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/tv.jpg" alt="camera" />
-              </div>
-              <div className="d-flex gap align-items-center">
-                <div>
-                  <h6>Smart Watches</h6>
-                  <p>10 Items</p>
-                </div>
-                <img src="images/headphone.jpg" alt="camera" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
+      <Categories data={services} />
+    
 
 
 
@@ -367,4 +325,14 @@ export default function Home() {
 
     </>
   )
+}
+
+
+export async function getServerSideProps(context) { 
+  const res = await fetch(ApiUrl.getService);
+  const data = await res.json();
+
+  return {
+      props: { services:data.data },
+  };
 }

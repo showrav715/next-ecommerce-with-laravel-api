@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
@@ -8,14 +8,9 @@ import BreadCrumb from "@/component/common/BreadCrumb";
 import Container from "@/component/styled/Container";
 import Color from "@/component/styled/Color";
 import ProductCard from "@/component/ProductCard";
-
-const SingleProduct = () => {
-  const props = {
-    width: 594,
-    height: 600,
-    zoomWidth: 600,
-    img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
-  };
+import ReactStars from "react-rating-stars-component";
+const SingleProduct = (props) => {
+  const { productProps } = props;
 
   const [orderedProduct, setorderedProduct] = useState(true);
   const copyToClipboard = (text) => {
@@ -37,7 +32,7 @@ const SingleProduct = () => {
           <div className="col-6">
             <div className="main-product-image">
               <div>
-                <ReactImageZoom {...props} />
+                <ReactImageZoom {...productProps} />
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
@@ -81,13 +76,13 @@ const SingleProduct = () => {
               <div className="border-bottom py-3">
                 <p className="price">$ 100</p>
                 <div className="d-flex align-items-center gap-10">
-                  {/* <ReactStars
+                  <ReactStars
                     count={5}
                     size={24}
                     value={4}
                     edit={false}
                     activeColor="#ffd700"
-                  /> */}
+                  />
                   <p className="mb-0 t-review">( 2 Reviews )</p>
                 </div>
                 <a className="review-btn" href="#review">
@@ -183,8 +178,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center my-3">
                   <h3 className="product-heading">Product Link:</h3>
-                  <a
-                    href="javascript:void(0);"
+                  <Link href=""
                     onClick={() => {
                       copyToClipboard(
                         "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
@@ -192,7 +186,7 @@ const SingleProduct = () => {
                     }}
                   >
                     Copy Product Link
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -223,13 +217,13 @@ const SingleProduct = () => {
                 <div>
                   <h4 className="mb-2">Customer Reviews</h4>
                   <div className="d-flex align-items-center gap-10">
-                    {/* <ReactStars
+                    <ReactStars
                       count={5}
                       size={24}
                       value={4}
                       edit={false}
                       activeColor="#ffd700"
-                    /> */}
+                    />
                     <p className="mb-0">Based on 2 Reviews</p>
                   </div>
                 </div>
@@ -245,13 +239,13 @@ const SingleProduct = () => {
                 <h4>Write a Review</h4>
                 <form action="" className="d-flex flex-column gap-15">
                   <div>
-                    {/* <ReactStars
+                    <ReactStars
                       count={5}
                       size={24}
                       value={4}
                       edit={true}
                       activeColor="#ffd700"
-                    /> */}
+                    />
                   </div>
                   <div>
                     <textarea
@@ -272,13 +266,13 @@ const SingleProduct = () => {
                 <div className="review">
                   <div className="d-flex gap-10 align-items-center">
                     <h6 className="mb-0">Navdeep</h6>
-                    {/* <ReactStars
+                    <ReactStars
                       count={5}
                       size={24}
                       value={4}
                       edit={false}
                       activeColor="#ffd700"
-                    /> */}
+                    />
                   </div>
                   <p className="mt-3">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -363,3 +357,18 @@ const SingleProduct = () => {
 };
 
 export default SingleProduct;
+
+
+export async function getServerSideProps(context) {
+
+  return {
+    props: {
+      productProps: {
+          width: 594,
+          height: 600,
+          zoomWidth: 600,
+          img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
+      }
+    }
+  }
+}

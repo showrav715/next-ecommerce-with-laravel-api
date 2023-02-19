@@ -1,6 +1,8 @@
 import Layout from "@/component/layout/Layout";
-import { BlogContextProvider } from "@/lib/context/BlogContext";
+import {CategoryContextProvider } from "@/lib/context/CategoryContext";
 import "@/styles/globals.css";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
 export default function App({ Component, pageProps }) {
@@ -8,10 +10,10 @@ export default function App({ Component, pageProps }) {
     import("bootstrap/dist/js/bootstrap");
 },[])
   return (
-    <BlogContextProvider>
+    <CategoryContextProvider>
     <Layout>
       <Component {...pageProps} />
       </Layout>
-    </BlogContextProvider>
+    </CategoryContextProvider>
   );
 }

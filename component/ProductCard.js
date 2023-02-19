@@ -1,4 +1,4 @@
-import React from "react";
+import ReactStars from "react-rating-stars-component";
 import Link from "next/link";
 const ProductCard = () => {
     let grid;
@@ -8,7 +8,7 @@ const ProductCard = () => {
         className={`col-3 `}
       >
         <Link
-          href=""
+          href="/product/1"
           className="product-card position-relative"
         >
           <div className="wishlist-icon position-absolute">
@@ -25,13 +25,13 @@ const ProductCard = () => {
             <h5 className="product-title">
               Kids headphones bulk 10 pack multi colored for students
             </h5>
-            {/* <ReactStars
+            <ReactStars
               count={5}
               size={24}
               value={4}
               edit={false}
               activeColor="#ffd700"
-            /> */}
+            />
             <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
               blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -59,7 +59,7 @@ const ProductCard = () => {
         className={`col-3 `}
       >
         <Link
-          href=""
+          href="/product/1"
           className="product-card position-relative"
         >
           <div className="wishlist-icon position-absolute">
@@ -76,13 +76,13 @@ const ProductCard = () => {
             <h5 className="product-title">
               Kids headphones bulk 10 pack multi colored for students
             </h5>
-            {/* <ReactStars
+            <ReactStars
               count={5}
               size={24}
-              value={4}
+              value={2.1}
               edit={false}
               activeColor="#ffd700"
-            /> */}
+            />
             <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
               At vero eos et accusamus et iusto odio dignissimos ducimus qui
               blanditiis praesentium voluptatum deleniti atque corrupti quos
