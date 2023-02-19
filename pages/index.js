@@ -1,155 +1,24 @@
 import Container from "@/component/styled/Container";
 
-import { Button } from "react-bootstrap";
-import Link from "next/link";
 import ProductCard from "@/component/ProductCard";
 import SpecialProduct from "@/component/SpecialProduct";
  
 import BlogCard from "@/component/BlogCard";
-import Slider from "react-slick";
+
 import Service from "@/component/Service";
 import ApiUrl from "@/lib/Api/ApiUrl";
 import Categories from "@/component/Categories";
-export default function Home({ services }) {
-console.log(services);
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 2000,
-    cssEase: "linear"
-  };
+import Slider from "@/component/Home/Sliders";
+export default function Home({ services,sliders }) {
+
+
+
+  
   return (
     <>
-      <Container class1="home-wrapper-1 py-5">
-        <div className="row">
-          <div className="col-6">
-          <Slider {...settings}>
-          <div className="main-banner position-relative ">
-              <img
-                src="images/main-banner-1.jpg"
-                className="img-fluid rounded-3"
-                alt="main banner"
-              />
-              <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS.</h4>
-                <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 or $41.62/mo.</p>
-                <Link href={'/'} className="button">BUY NOW</Link>
-              </div>
-            </div>
-          <div className="main-banner position-relative ">
-              <img
-                src="images/main-banner-1.jpg"
-                className="img-fluid rounded-3"
-                alt="main banner"
-              />
-              <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS.</h4>
-                <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 or $41.62/mo.</p>
-                <Link href={'/'} className="button">BUY NOW</Link>
-              </div>
-            </div>
-          <div className="main-banner position-relative ">
-              <img
-                src="images/main-banner-1.jpg"
-                className="img-fluid rounded-3"
-                alt="main banner"
-              />
-              <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS.</h4>
-                <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 or $41.62/mo.</p>
-                <Link href={'/'} className="button">BUY NOW</Link>
-              </div>
-            </div>
-        </Slider>
-
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div className="col-6">
-            <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
-              <div className="small-banner position-relative">
-                <img
-                  src="images/catbanner-01.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>Best Sake</h4>
-                  <h5>iPad S13+ Pro.</h5>
-                  <p>
-                    From $999.00 <br /> or $41.62/mo.
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative">
-                <img
-                  src="images/catbanner-02.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
-                  <p>
-                    From $999.00 <br /> or $41.62/mo.
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative ">
-                <img
-                  src="images/catbanner-03.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
-                  <p>
-                    From $999.00 <br /> or $41.62/mo.
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative ">
-                <img
-                  src="images/catbanner-04.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
-                  <p>
-                    From $999.00 <br /> or $41.62/mo.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
+      
  
-    
+      <Slider data={sliders} />
       <Service data={services} />
 
       <Categories data={services} />
@@ -328,11 +197,12 @@ console.log(services);
 }
 
 
-export async function getServerSideProps(context) { 
-  const res = await fetch(ApiUrl.getService);
-  const data = await res.json();
-
+export async function getServerSideProps() { 
+  const serviceRes = await fetch(ApiUrl.getService);
+  const service = await serviceRes.json();
+  const sliderRes = await fetch(ApiUrl.getsliders);
+  const slider = await sliderRes.json();
   return {
-      props: { services:data.data },
+      props: { services:service.data,sliders:slider.data },
   };
 }

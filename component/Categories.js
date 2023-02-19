@@ -5,7 +5,6 @@ import Container from "./styled/Container";
 
 export default function Categories() {
   const { categories } = useContext(CategoryContext);
-  console.log(categories);
   return (
     <Container class1="home-wrapper-2 py-5">
       <div className="row">
