@@ -1,0 +1,51 @@
+{
+    "name": "NEXTJS",
+    "short_name": "THIS IS NEXTJS",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#90cdf4",
+    "theme_color": "#90cdf4",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "72x72"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "96x96"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "128x128"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "144x144"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "152x152"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "384x384"
+      },
+      {
+        "src": "/next.svg",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }

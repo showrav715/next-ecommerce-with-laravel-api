@@ -1,19 +1,15 @@
 import Container from "@/component/styled/Container";
-
-import ProductCard from "@/component/ProductCard";
 import SpecialProduct from "@/component/SpecialProduct";
- 
-import BlogCard from "@/component/BlogCard";
-
 import Service from "@/component/Service";
 import ApiUrl from "@/lib/Api/ApiUrl";
 import Categories from "@/component/Categories";
 import Slider from "@/component/Home/Sliders";
+import FeaturedProduct from "@/component/FeaturedProduct";
+import PopularProduct from "@/component/PopularProduct";
+import LatestBlog from "@/component/LatestBlog";
 export default function Home({ services,sliders }) {
 
 
-
-  
   return (
     <>
       
@@ -25,18 +21,8 @@ export default function Home({ services,sliders }) {
     
 
 
+      <FeaturedProduct />
 
-      <Container class1="featured-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Featured Collection</h3>
-          </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
-      </Container>
 
 
       <Container class1="famous-wrapper py-5 home-wrapper-2">
@@ -105,33 +91,9 @@ export default function Home({ services,sliders }) {
       </Container>
 
 
-      <Container class1="special-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Special Products</h3>
-          </div>
-        </div>
-        <div className="row">
-          <SpecialProduct />
-          <SpecialProduct />
-          <SpecialProduct />
-          <SpecialProduct />
-        </div>
-      </Container>
+      <SpecialProduct/>
+      <PopularProduct />
 
-      <Container class1="popular-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Our Popular Products</h3>
-          </div>
-        </div>
-        <div className="row">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
-      </Container>
 
       {/* <Container class1="marque-wrapper home-wrapper-2 py-5">
         <div className="row">
@@ -169,27 +131,7 @@ export default function Home({ services,sliders }) {
       </Container> */}
 
 
-      <Container class1="blog-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="section-heading">Our Latest Blogs</h3>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-          <div className="col-3">
-            <BlogCard />
-          </div>
-        </div>
-      </Container>
+      <LatestBlog />
 
 
     </>

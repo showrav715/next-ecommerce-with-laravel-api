@@ -12,7 +12,7 @@ const Blog = () => {
         <div className="row">
           <div className="col-12">
             <div className="single-blog-card">
-              <Link href="/blogs" className="d-flex align-items-center gap-10">
+              <Link href="/blog" className="d-flex align-items-center gap-10">
                 <HiOutlineArrowLeft className="fs-4" /> Go back to Blogs
               </Link>
               <h3 className="title">A Beautiful Sunday Morning Renaissance</h3>

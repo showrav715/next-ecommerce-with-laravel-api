@@ -12,12 +12,12 @@ export default function Categories() {
           <div className="categories d-flex justify-content-between flex-wrap align-items-center">
             {categories.map((category) => {
               return (
-                <div className="d-flex gap align-items-center">
+                <div className="d-flex gap align-items-center" key={category.id}>
                   <div>
                     <h6>{category.name}</h6>
                     <p>{category.count}</p>
                   </div>
-                  <Image src={category.image} height={110} width={110} />
+                  <Image alt="category" src={category.image} height={110} width={110} />
                 </div>
               );
             })}

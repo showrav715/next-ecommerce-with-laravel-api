@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
 import { CategoryContext } from "@/lib/context/CategoryContext";
+import Head from "next/head";
 
 const Header = () => {
 
   const { categories } = useContext(CategoryContext);
   return (
     <>
+      <Head>
+      <link rel="manifest" href="/manifest.json" />
+      <meta name="theme-color" content="#90cdf4" />
+      </Head>
       <header className="header-top-strip py-3">
         <div className="container-xxl">
           <div className="row">
@@ -125,15 +130,13 @@ const Header = () => {
                       aria-labelledby="dropdownMenuButton1"
                     >
                       {categories.map((category) => (
-                         <li key={categories.id}>
+                         <li key={category.id}>
                          <Link className="dropdown-item text-white" href="/store">
                            {category.name}
                          </Link>
                        </li>
                         ))}
                       
-                     
-                     
                     </ul>
                   </div>
                 </div>

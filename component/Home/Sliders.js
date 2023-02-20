@@ -18,7 +18,7 @@ export default function Sliders({ data }) {
           <Slider {...settings}>
             {data.map((slider) => {
               return (
-                <div className="main-banner position-relative ">
+                <div key={slider.id} className="main-banner position-relative ">
                   <img
                     src={slider.image}
                     className="img-fluid rounded-3"

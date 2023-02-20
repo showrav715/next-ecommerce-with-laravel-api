@@ -1,18 +1,20 @@
 import Link from "next/link";
-const BlogCard = () => {
+const BlogCard = ({id,title,details,photo,created_at}) => {
   return (
     <div className="blog-card">
       <div className="card-image">
-        <img src="images/blog-1.jpg" className="img-fluid w-100" alt="blog" />
+        <img src={photo} className="img-fluid w-100" alt="blog" />
       </div>
       <div className="blog-content">
-        <p className="date">1 Dec, 2022</p>
-        <h5 className="title">A beautiful sunday morning renaissance</h5>
-        <p className="desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque quaerat
-          accusamus officia
+        <p className="date">
+          {/* date format */}
+          {new Date(created_at).toDateString()}
         </p>
-        <Link href={`blog/:${2}`} className="button">
+        <h5 className="title">{title}</h5>
+        <p className="desc">
+          {details.substring(0, 100) + "..."}
+        </p>
+        <Link href={`blog/:${id}`} className="button">
           Read More
         </Link>
       </div>

@@ -1,13 +1,13 @@
 import BlogCard from "@/component/BlogCard";
 import BreadCrumb from "@/component/common/BreadCrumb";
 import Container from "@/component/styled/Container";
-import React from "react";
-
+import { BlogContext } from "@/lib/context/BlogContext";
+import React, { useContext } from "react";
 
 const Blog = () => {
+  const { blogs } = useContext(BlogContext);
   return (
     <>
-     
       <BreadCrumb title="Blogs" />
       <Container class1="blog-wrapper home-wrapper-2 py-5">
         <div className="row">
@@ -26,18 +26,13 @@ const Blog = () => {
           </div>
           <div className="col-9">
             <div className="row">
-              <div className="col-6 mb-3">
-                <BlogCard />
-              </div>
-              <div className="col-6 mb-3">
-                <BlogCard />
-              </div>
-              <div className="col-6 mb-3">
-                <BlogCard />
-              </div>
-              <div className="col-6 mb-3">
-                <BlogCard />
-              </div>
+              {blogs.map((item, index) => {
+                return (
+                  <div className="col-3" key={item.id}>
+                    <BlogCard {...item} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
