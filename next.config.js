@@ -1,4 +1,5 @@
 const nextConfig = {
+  basePath: '/nextecommerce',
   images: {
     remotePatterns: [
       {
