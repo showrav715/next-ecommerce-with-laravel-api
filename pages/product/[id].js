@@ -9,81 +9,92 @@ import Container from "@/component/styled/Container";
 import Color from "@/component/styled/Color";
 import ProductCard from "@/component/ProductCard";
 import ReactStars from "react-rating-stars-component";
-const SingleProduct = (props) => {
-  const { productProps } = props;
-
+import ApiUrl from "@/lib/Api/ApiUrl";
+import axios from "axios";
+const SingleProduct = (product) => {
+  const {
+    id,
+    title,
+    previous_price,
+    current_price,
+    rating,
+    thumbnail,
+    type,
+    reviews,
+    condition,
+    category,
+    details,
+    stock,
+    related_products,
+    estimated_shipping_time,
+  } = product;
+  console.log(product);
   const [orderedProduct, setorderedProduct] = useState(true);
-  const copyToClipboard = (text) => {
-    alert("text", text);
-    var textField = document.createElement("textarea");
-    textField.innerText = text;
-    document.body.appendChild(textField);
-    textField.select();
-    document.execCommand("copy");
-    textField.remove();
+
+  // filter duplicate product sizes
+  const sizes = [...new Set(product.sizes.map((item) => item))];
+  const colors = [...new Set(product.colors.map((item) => item))];
+
+  const [productImage, setProductImage] = useState({
+    width: 400,
+    height: 400,
+    zoomWidth: 500,
+    img: product.first_image,
+  });
+
+  const handleChangeImage = (image) => {
+    setProductImage({
+      width: 400,
+      height: 400,
+      zoomWidth: 500,
+      img: image,
+    });
   };
+
   const closeModal = () => {};
   return (
     <>
-      
       <BreadCrumb title="Product Name" />
       <Container class1="main-product-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-6">
             <div className="main-product-image">
               <div>
-                <ReactImageZoom {...productProps} />
+                <ReactImageZoom {...productImage} />
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
-              </div>
+              {product.images.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => handleChangeImage(item.image)}
+                  >
+                    <img src={item.image} className="img-fluid" alt="" />
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="col-6">
             <div className="main-product-details">
               <div className="border-bottom">
-                <h3 className="title">
-                  Kids Headphones Bulk 10 Pack Multi Colored For Students
-                </h3>
+                <h3 className="title">{title}</h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$ 100</p>
+                <div className="d-flex">
+                  <h3 className="price">$ {current_price}</h3>
+                  <del className="mx-3">$ {previous_price}</del>
+                </div>
                 <div className="d-flex align-items-center gap-10">
                   <ReactStars
                     count={5}
                     size={24}
-                    value={4}
+                    value={rating}
                     edit={false}
                     activeColor="#ffd700"
                   />
-                  <p className="mb-0 t-review">( 2 Reviews )</p>
+                  <p className="mb-0 t-review">( {reviews.length} Reviews )</p>
                 </div>
                 <a className="review-btn" href="#review">
                   Write a Review
@@ -92,44 +103,41 @@ const SingleProduct = (props) => {
               <div className=" py-3">
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Type :</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{type}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
-                  <h3 className="product-heading">Brand :</h3>
-                  <p className="product-data">Havells</p>
+                  <h3 className="product-heading">Condition :</h3>
+                  <p className="product-data">{condition}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Category :</h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{type}</p>
                 </div>
-                <div className="d-flex gap-10 align-items-center my-2">
-                  <h3 className="product-heading">Tags :</h3>
-                  <p className="product-data">Watch</p>
-                </div>
+
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Availablity :</h3>
-                  <p className="product-data">In Stock</p>
+                  <p className="product-data">
+                    {stock != 0 ? "In Stock" : "Out of stock"}
+                  </p>
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Size :</h3>
                   <div className="d-flex flex-wrap gap-15">
-                    <span className="badge border border-1 bg-white text-dark border-secondary">
-                      S
-                    </span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">
-                      M
-                    </span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">
-                      XL
-                    </span>
-                    <span className="badge border border-1 bg-white text-dark border-secondary">
-                      XXL
-                    </span>
+                    {sizes.map((size, index) => {
+                      return (
+                        <span
+                          key={index}
+                          className="badge border border-1 text-dark border-secondary "
+                        >
+                          {size}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Color :</h3>
-                  <Color />
+                  <Color colors={colors} />
                 </div>
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
@@ -139,6 +147,7 @@ const SingleProduct = (props) => {
                       name=""
                       min={1}
                       max={10}
+                      value={1}
                       className="form-control"
                       style={{ width: "70px" }}
                       id=""
@@ -173,12 +182,13 @@ const SingleProduct = (props) => {
                   <p className="product-data">
                     Free shipping and returns available on all orders! <br /> We
                     ship all US domestic orders within
-                    <b>5-10 business days!</b>
+                     <b> {estimated_shipping_time} </b>
                   </p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-3">
                   <h3 className="product-heading">Product Link:</h3>
-                  <Link href=""
+                  <Link
+                    href=""
                     onClick={() => {
                       copyToClipboard(
                         "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
@@ -199,10 +209,7 @@ const SingleProduct = (props) => {
             <h4>Description</h4>
             <div className="bg-white p-3">
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tenetur nisi similique illum aut perferendis voluptas, quisquam
-                obcaecati qui nobis officia. Voluptatibus in harum deleniti
-                labore maxime officia esse eos? Repellat?
+                {details}
               </p>
             </div>
           </div>
@@ -275,11 +282,7 @@ const SingleProduct = (props) => {
                     />
                   </div>
                   <p className="mt-3">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Consectetur fugit ut excepturi quos. Id reprehenderit
-                    voluptatem placeat consequatur suscipit ex. Accusamus dolore
-                    quisquam deserunt voluptate, sit magni perspiciatis quas
-                    iste?
+                    {details}
                   </p>
                 </div>
               </div>
@@ -290,11 +293,15 @@ const SingleProduct = (props) => {
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading">Our Popular Products</h3>
+            <h3 className="section-heading">Related Products</h3>
           </div>
         </div>
         <div className="row">
-          <ProductCard />
+          {related_products.map((product) => {
+            return (
+              <ProductCard {...product} />
+            )
+          })}
         </div>
       </Container>
 
@@ -320,7 +327,11 @@ const SingleProduct = (props) => {
             <div className="modal-body py-0">
               <div className="d-flex align-items-center">
                 <div className="flex-grow-1 w-50">
-                  <img src="/images/watch.jpg" className="img-fluid" alt="product imgae" />
+                  <img
+                    src="/images/watch.jpg"
+                    className="img-fluid"
+                    alt="product imgae"
+                  />
                 </div>
                 <div className="d-flex flex-column flex-grow-1 w-50">
                   <h6 className="mb-3">Apple Watch</h6>
@@ -358,17 +369,14 @@ const SingleProduct = (props) => {
 
 export default SingleProduct;
 
-
 export async function getServerSideProps(context) {
+  const singleProduct = await axios.get(
+    ApiUrl.singleProduct(context.params.id)
+  );
 
   return {
     props: {
-      productProps: {
-          width: 594,
-          height: 600,
-          zoomWidth: 600,
-          img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
-      }
-    }
-  }
+      ...singleProduct.data.data,
+    },
+  };
 }

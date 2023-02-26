@@ -19,13 +19,13 @@ const SpecialProduct = () => {
               <div className="col-6 mb-3">
                 <div className="special-product-card">
                   <div className="d-flex justify-content-between">
-                    <div>
+                    <Link href={`product/${item.id}`}>
                       <img
                         src={item.thumbnail}
                         className="img-fluid"
                         alt="watch"
                       />
-                    </div>
+                    </Link>
                     <div className="special-product-content">
                       <h5 className="brand">Havels</h5>
                       <h6 className="title">

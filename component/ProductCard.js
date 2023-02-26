@@ -11,9 +11,7 @@ const ProductCard = ({id,title,previous_price,current_price,rating,thumbnail}) =
         className={`col-3 `}
       >
         <Link
-          href="/product/1"
-          className="product-card position-relative"
-        >
+          href={`/product/${ id}`} className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transparent">
               <img src="/images/wish.svg" alt="wishlist" />
