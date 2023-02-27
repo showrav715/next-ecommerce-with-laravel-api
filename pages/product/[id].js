@@ -299,7 +299,7 @@ const SingleProduct = (product) => {
         <div className="row">
           {related_products.map((product) => {
             return (
-              <ProductCard {...product} />
+              <ProductCard key={product.id} {...product} />
             )
           })}
         </div>
