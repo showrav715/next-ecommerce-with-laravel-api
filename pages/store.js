@@ -255,7 +255,7 @@ const OurStore = () => {
                 )
                 }
                 {filter_products.map((product) => {
-                  return (<ProductCard grid={grid} {...product} />)
+                  return (<ProductCard key={product.id} grid={grid} {...product} />)
                 })}
               </div>
             </div>
