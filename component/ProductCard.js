@@ -1,14 +1,12 @@
 import ReactStars from "react-rating-stars-component";
 import Link from "next/link";
-const ProductCard = ({id,title,previous_price,current_price,rating,thumbnail}) => {
-  let grid;
-  
- 
+const ProductCard = ({id,title,previous_price,current_price,rating,thumbnail,grid}) => {
+
 
   return (
     <>
       <div
-        className={`col-3 `}
+        className={`col-${grid} col-md-6 col-lg-${grid}`}
       >
         <Link
           href={`/product/${ id}`} className="product-card position-relative">

@@ -8,9 +8,11 @@ const ProductProvider = ({ children }) => {
 
     const initsvalue = {
         products: [],
+        filter_products: [],
         featuredProducts: [],
         special_offers: [],
         popular_products: [],
+        colors : [],
         loading: false,
         error: '',
     }
@@ -32,10 +34,18 @@ const ProductProvider = ({ children }) => {
             dispatch({ type: 'ERROR', payload: error });
         }
     }
+
+    const filterProducts = (event) => {
+    //    li attribute name and value
+        const name = event.target.getAttribute('name');
+        const value = event.target.value;
+        console.log(name, value);
+         dispatch({ type: 'FILTER_PRODUCTS', payload: {name,value} });
+    }
     
 
     return (
-        <ProductContext.Provider value={{ ...state }}>
+        <ProductContext.Provider value={{ ...state,filterProducts }}>
             {children}
         </ProductContext.Provider>
     )

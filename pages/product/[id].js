@@ -11,6 +11,7 @@ import ProductCard from "@/component/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import ApiUrl from "@/lib/Api/ApiUrl";
 import axios from "axios";
+
 const SingleProduct = (product) => {
   const {
     id,
@@ -32,8 +33,8 @@ const SingleProduct = (product) => {
   const [orderedProduct, setorderedProduct] = useState(true);
 
   // filter duplicate product sizes
-  const sizes = [...new Set(product.sizes.map((item) => item))];
-  const colors = [...new Set(product.colors.map((item) => item))];
+  const sizes = product.sizes.length != 0 ? [...new Set(product.sizes.map((item) => item))] : [];
+  const colors = product.colors.length != 0 ? [...new Set(product.colors.map((item) => item))] : [];
 
   const [productImage, setProductImage] = useState({
     width: 400,
@@ -51,7 +52,7 @@ const SingleProduct = (product) => {
     });
   };
 
-  const closeModal = () => {};
+  const closeModal = () => { };
   return (
     <>
       <BreadCrumb title="Product Name" />
@@ -120,25 +121,32 @@ const SingleProduct = (product) => {
                     {stock != 0 ? "In Stock" : "Out of stock"}
                   </p>
                 </div>
-                <div className="d-flex gap-10 flex-column mt-2 mb-3">
-                  <h3 className="product-heading">Size :</h3>
-                  <div className="d-flex flex-wrap gap-15">
-                    {sizes.map((size, index) => {
-                      return (
-                        <span
-                          key={index}
-                          className="badge border border-1 text-dark border-secondary "
-                        >
-                          {size}
-                        </span>
-                      );
-                    })}
+                {sizes.length != 0 && (
+                  <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                    <h3 className="product-heading">Size :</h3>
+                    <div className="d-flex flex-wrap gap-15">
+                      {sizes.map((size, index) => {
+                        return (
+                          <span
+                            key={index}
+                            className="badge border border-1 text-dark border-secondary "
+                          >
+                            {size}
+                          </span>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                )}
+
+
+                {colors.length != 0 && (
+                  <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Color :</h3>
                   <Color colors={colors} />
                 </div>
+                )}
+                
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
                   <div className="">
@@ -182,7 +190,7 @@ const SingleProduct = (product) => {
                   <p className="product-data">
                     Free shipping and returns available on all orders! <br /> We
                     ship all US domestic orders within
-                     <b> {estimated_shipping_time} </b>
+                    <b> {estimated_shipping_time} </b>
                   </p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-3">

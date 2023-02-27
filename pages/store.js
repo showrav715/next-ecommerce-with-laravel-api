@@ -1,15 +1,21 @@
+
 import BreadCrumb from "@/component/common/BreadCrumb";
 import ProductCard from "@/component/ProductCard";
 import Color from "@/component/styled/Color";
 import Container from "@/component/styled/Container";
-import React, { useState } from "react";
+import { CategoryContext } from "@/lib/context/CategoryContext";
+import { ProductContext } from "@/lib/context/ProductContext";
+import React, { useContext, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 
 const OurStore = () => {
+  const { filter_products, filterProducts, colors } = useContext(ProductContext);
+  const { categories } = useContext(CategoryContext);
   const [grid, setGrid] = useState(4);
+
   return (
     <>
-      
+
       <BreadCrumb title="Our Store" />
       <Container class1="store-wrapper home-wrapper-2 py-5">
         <div className="row">
@@ -18,10 +24,11 @@ const OurStore = () => {
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
                 <ul className="ps-0">
-                  <li>Watch</li>
-                  <li>Tv</li>
-                  <li>Camera</li>
-                  <li>Laptop</li>
+                  {categories.map((category) => {
+                    return (
+                      <li name="category" value={category.id} onClick={(e) => { filterProducts(e) }} key={category.id}>{category.name}</li>
+                    )
+                  })}
                 </ul>
               </div>
             </div>
@@ -76,7 +83,7 @@ const OurStore = () => {
                 </div>
                 <h5 className="sub-title">Colors</h5>
                 <div>
-                  <Color />
+                  <Color colors={colors} />
                 </div>
                 <h5 className="sub-title">Size</h5>
                 <div>
@@ -240,8 +247,16 @@ const OurStore = () => {
               </div>
             </div>
             <div className="products-list pb-5">
-              <div className="d-flex gap-10 flex-wrap">
-                <ProductCard grid={grid} />
+              <div className="d-flex flex-wrap">
+                {filter_products.length === 0 && (
+                  <div className="text-center w-100 border p-5">
+                    <h3>No Products Found</h3>
+                  </div>
+                )
+                }
+                {filter_products.map((product) => {
+                  return (<ProductCard grid={grid} {...product} />)
+                })}
               </div>
             </div>
           </div>
