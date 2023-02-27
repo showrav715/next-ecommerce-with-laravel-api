@@ -4,11 +4,22 @@ import BreadCrumb from "@/component/common/BreadCrumb";
 import Container from "@/component/styled/Container";
 import CustomInput from "@/component/common/CustomInput";
 
-
 const Login = () => {
+  const [state, setState] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setState({ ...state, email: value });
+    } else if (name === "password") {
+      setState({ ...state, password: value });
+    }
+  };
   return (
     <>
-      
       <BreadCrumb title="Login" />
 
       <Container class1="login-wrapper py-5 home-wrapper-2">
@@ -17,9 +28,15 @@ const Login = () => {
             <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
               <form action="" className="d-flex flex-column gap-15">
-                <CustomInput type="email" name="email" placeholder="Email" />
+                <CustomInput
+                  type="email"
+                  handleChange={handleChange}
+                  name="email"
+                  placeholder="Email"
+                />
                 <CustomInput
                   type="password"
+                  handleChange={handleChange}
                   name="password"
                   placeholder="Password"
                 />

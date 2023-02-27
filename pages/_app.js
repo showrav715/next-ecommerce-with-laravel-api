@@ -7,19 +7,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
 import { ProductProvider } from "@/lib/context/ProductContext";
 import { BlogContextProvider } from "@/lib/context/BlogContext";
+import { UserProvider } from "@/lib/context/UserContext";
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap");
   }, []);
   return (
     <CategoryContextProvider>
+      <UserProvider>
       <Layout>
         <ProductProvider>
         <BlogContextProvider>
           <Component {...pageProps} />
         </BlogContextProvider>
         </ProductProvider>
-      </Layout>
+        </Layout>
+      </UserProvider>
     </CategoryContextProvider>
   );
 }
