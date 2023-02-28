@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import BreadCrumb from "@/component/common/BreadCrumb";
 import Container from "@/component/styled/Container";
 import CustomInput from "@/component/common/CustomInput";
+import axios from "axios";
+import ApiUrl from "@/lib/Api/ApiUrl";
+import { UserContext } from "@/lib/context/UserContext";
 
 const Login = () => {
+  const {setUser,setAccessToken} = useContext(UserContext);
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -18,6 +22,20 @@ const Login = () => {
       setState({ ...state, password: value });
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(ApiUrl.login, { ...state }).then((res) => {
+      console.log(res.data.data);
+      setUser(res.data.data.user);
+      setAccessToken(res.data.data.token);
+      alert("Login Success");
+    })
+  }
+
+
+
+
   return (
     <>
       <BreadCrumb title="Login" />
@@ -27,7 +45,7 @@ const Login = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
-              <form action="" className="d-flex flex-column gap-15">
+              <form onSubmit={handleSubmit} className="d-flex flex-column gap-15">
                 <CustomInput
                   type="email"
                   handleChange={handleChange}
