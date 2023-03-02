@@ -3,9 +3,10 @@ import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
 import { CategoryContext } from "@/lib/context/CategoryContext";
 import Head from "next/head";
+import { UserContext } from "@/lib/context/UserContext";
 
 const Header = () => {
-
+  const {access_token} = useContext(UserContext);
   const { categories } = useContext(CategoryContext);
   return (
     <>
@@ -80,12 +81,12 @@ const Header = () => {
                 </div>
                 <div>
                   <Link
-                    href="/user/login"
+                    href={access_token ? "/user/dashboard" : "/user/login"}
                     className="d-flex align-items-center gap-10 text-white"
                   >
                     <img src="/images/user.svg" alt="user" />
                     <p className="mb-0">
-                      Log in <br /> My Account
+                      {!access_token && "Log in <br />"} My Account
                     </p>
                   </Link>
                 </div>

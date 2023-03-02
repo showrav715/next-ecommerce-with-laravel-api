@@ -6,7 +6,7 @@ const ProductCard = ({id,title,previous_price,current_price,rating,thumbnail,gri
   return (
     <>
       <div
-        className={`col-${grid} col-md-6 col-lg-${grid}`}
+        className={`col-${grid} col-md-${grid} col-lg-${grid}`}
       >
         <Link
           href={`/product/${ id}`} className="product-card position-relative">

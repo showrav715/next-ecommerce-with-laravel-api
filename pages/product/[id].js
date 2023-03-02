@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
@@ -11,8 +11,11 @@ import ProductCard from "@/component/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import ApiUrl from "@/lib/Api/ApiUrl";
 import axios from "axios";
+import { FaCheck } from "react-icons/fa";
+import { CartContext } from "@/lib/context/CartContext";
 
 const SingleProduct = (product) => {
+  const { addToCart } = useContext(CartContext);
   const {
     id,
     title,
@@ -29,12 +32,17 @@ const SingleProduct = (product) => {
     related_products,
     estimated_shipping_time,
   } = product;
-  console.log(product);
   const [orderedProduct, setorderedProduct] = useState(true);
 
   // filter duplicate product sizes
-  const sizes = product.sizes.length != 0 ? [...new Set(product.sizes.map((item) => item))] : [];
-  const colors = product.colors.length != 0 ? [...new Set(product.colors.map((item) => item))] : [];
+  const sizes =
+    product.sizes.length != 0
+      ? [...new Set(product.sizes.map((item) => item))]
+      : [];
+  const colors =
+    product.colors.length != 0
+      ? [...new Set(product.colors.map((item) => item))]
+      : [];
 
   const [productImage, setProductImage] = useState({
     width: 400,
@@ -46,13 +54,20 @@ const SingleProduct = (product) => {
   const handleChangeImage = (image) => {
     setProductImage({
       width: 400,
+      scale: 1.8,
       height: 400,
       zoomWidth: 500,
       img: image,
     });
   };
 
-  const closeModal = () => { };
+  const [color, setColor] = useState(colors[0]);
+  const [size, setSize] = useState(sizes[0]);
+  const [qty, setQty] = useState(1);
+  const handleColor = (color) => {
+    return setColor(color);
+  };
+
   return (
     <>
       <BreadCrumb title="Product Name" />
@@ -125,13 +140,17 @@ const SingleProduct = (product) => {
                   <div className="d-flex gap-10 flex-column mt-2 mb-3">
                     <h3 className="product-heading">Size :</h3>
                     <div className="d-flex flex-wrap gap-15">
-                      {sizes.map((size, index) => {
+                      {sizes.map((currSize, index) => {
                         return (
                           <span
                             key={index}
+                            onClick={() => setSize(currSize)}
                             className="badge border border-1 text-dark border-secondary "
                           >
-                            {size}
+                            {size == currSize && (
+                              <FaCheck className=" text-dark mx-1" />
+                            )}
+                            {currSize}
                           </span>
                         );
                       })}
@@ -139,23 +158,27 @@ const SingleProduct = (product) => {
                   </div>
                 )}
 
-
                 {colors.length != 0 && (
                   <div className="d-flex gap-10 flex-column mt-2 mb-3">
-                  <h3 className="product-heading">Color :</h3>
-                  <Color colors={colors} />
-                </div>
+                    <h3 className="product-heading">Color :</h3>
+                    {colors && (
+                      <Color
+                        colors={colors}
+                        mainColor={color}
+                        handleColor={handleColor}
+                      />
+                    )}
+                  </div>
                 )}
-                
+
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>
                   <div className="">
                     <input
                       type="number"
                       name=""
+                      onChange={(e) => setQty(e.target.value)}
                       min={1}
-                      max={10}
-                      value={1}
                       className="form-control"
                       style={{ width: "70px" }}
                       id=""
@@ -167,6 +190,7 @@ const SingleProduct = (product) => {
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
                       type="button"
+                      onClick={() => addToCart(product, color, size, qty)}
                     >
                       Add to Cart
                     </button>
@@ -216,9 +240,7 @@ const SingleProduct = (product) => {
           <div className="col-12">
             <h4>Description</h4>
             <div className="bg-white p-3">
-              <p>
-                {details}
-              </p>
+              <p>{details}</p>
             </div>
           </div>
         </div>
@@ -289,9 +311,7 @@ const SingleProduct = (product) => {
                       activeColor="#ffd700"
                     />
                   </div>
-                  <p className="mt-3">
-                    {details}
-                  </p>
+                  <p className="mt-3">{details}</p>
                 </div>
               </div>
             </div>
@@ -306,9 +326,7 @@ const SingleProduct = (product) => {
         </div>
         <div className="row">
           {related_products.map((product) => {
-            return (
-              <ProductCard key={product.id} {...product} />
-            )
+            return <ProductCard key={product.id} {...product} />;
           })}
         </div>
       </Container>

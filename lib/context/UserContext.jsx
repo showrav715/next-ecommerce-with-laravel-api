@@ -3,17 +3,17 @@ import reducer from '../reducer/UserContext';
 const UserContext = createContext();
 
 const initialState = {
-    user: null,
+    user: typeof window !== 'undefined' ? localStorage.getItem('user') : null,
+    access_token: typeof window !== 'undefined' ? localStorage.getItem('access_token') : null,
     refresh_token: null,
     isLogged: false,
     setUser: () => { },
     setAccessToken: () => { },
 }
 const UserProvider = ({ children }) => { 
-    
     const [state, dispatch] = useReducer(reducer, initialState);
 
-
+    const [accessToken, _setAccessToken] = useState(state.access_token);
     const setUser = (user) => {
         dispatch({
             type: "SET_USER",

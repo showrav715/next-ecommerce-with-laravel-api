@@ -15,7 +15,7 @@ export default function PopularProduct() {
     <div className="row">
               {popular_products.map((item, index) => { 
                   return (
-                    <ProductCard {...item} />
+                    <ProductCard {...item} grid={3} />
                   )
               })}
     </div>

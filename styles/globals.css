@@ -36,7 +36,12 @@
     box-shadow: none;
     border-color: inherit;
   }
-
+  .checkStyle {
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 5px;
+  }
 
   .active {
     color: blue !important;

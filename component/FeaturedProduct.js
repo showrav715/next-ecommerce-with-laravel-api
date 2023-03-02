@@ -12,7 +12,7 @@ export default function FeaturedProduct() {
           <h3 className="section-heading">Featured Collection</h3>
         </div>
               {featuredProducts.map((product) => {
-                  return <ProductCard {...product} />
+                  return <ProductCard {...product} grid={3}/>
               })}
         
       </div>
